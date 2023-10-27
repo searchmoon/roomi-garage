@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import reset from "styled-reset";
-import "../styles/webfont.css";
-import { commonColors } from "./commonColors";
+import { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
+import '../styles/webfont.css';
+import { commonColors } from './commonColors';
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
         font-size: 16px;
         vertical-align: baseline;
         letter-spacing: 1px;
+        color: ${commonColors.black};
     }
     body{
         line-height: 1;
