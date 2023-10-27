@@ -1,9 +1,9 @@
 @font-face {
-  font-family: "CraftyNotesRegular";
-  src: url("../assets/fonts/CraftyNotesRegular-9YW77.ttf") format("truetype");
+  font-family: 'CraftyNotesRegular';
+  src: url('../assets/fonts/CraftyNotesRegular-9YW77.ttf') format('truetype');
 }
 
 @font-face {
-  font-family: "EF_Diary";
-  src: url("../assets/fonts/EF_Diary.ttf") format("truetype");
+  font-family: 'EF_Diary';
+  src: url('../assets/fonts/EF_Diary.ttf') format('truetype');
 }
