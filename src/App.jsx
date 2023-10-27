@@ -1,8 +1,5 @@
-
-
 function App() {
-
-  return <>안녀</>;
+  return <div>안녀엉</div>;
 }
 
 export default App;
