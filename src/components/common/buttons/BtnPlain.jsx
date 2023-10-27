@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { commonColors } from '../../styles/commonColors';
+import { commonColors } from '../../../styles/commonColors';
 
 // 쓰는 properties: width, padding, disabled, color onClick, icon 등
 const BtnPlain = (props) => {

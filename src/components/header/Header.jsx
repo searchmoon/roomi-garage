@@ -6,7 +6,7 @@ import { commonColors } from '../../styles/commonColors';
 import { DefaultLayout } from '../layouts/DefaultLayout';
 import FilterInput from './FilterInput';
 import BtnHeaderIcon from './BtnHeaderIcon';
-import BtnPlain from '../Buttons/BtnPlain';
+import BtnPlain from '../common/buttons/BtnPlain';
 
 function Header() {
   return (
