@@ -15,8 +15,7 @@ const Footer = () => {
           <Link to="/" className="bold">
             개인정보처리방침
           </Link>
-          |<Link to="/">전자금융거래약관</Link> |<Link to="/">청소년보호정책</Link> |
-          <Link to="/">제휴문의</Link>
+          |<Link to="/">전자금융거래약관</Link>|<Link to="/">제휴문의</Link>
         </div>
         <div className="sns-box">
           <Link to="/">
