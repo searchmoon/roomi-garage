@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import GlobalStyles from './styles/GlobalStyles';
 import Main from './pages/Main';
 import Layout from './components/layouts/Layout';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
+          <Route path="/productDetail/:id" element={<ProductDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>
