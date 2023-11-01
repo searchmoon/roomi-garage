@@ -4,33 +4,65 @@ import ProductList from '../components/main/ProductList';
 import { axiosInstance } from '../api/axios-api';
 import styled from 'styled-components';
 import { DefaultLayout } from '../components/layouts/DefaultLayout';
+import { useInView } from 'react-intersection-observer';
+import { Link } from 'react-router-dom';
+import CountBtn from '../components/common/buttons/CountBtn';
+import useCounter from '../hooks/useCounter';
 
 const Main = () => {
   const [products, setProducts] = useState([]);
+  const [ref, inView] = useInView();
+  const [page, setPage] = useState(1);
 
-  const loadProducts = async () => {
-    const listItem = await axiosInstance.get('products');
-
+  const infinityScroll = async () => {
+    const listItem = await axiosInstance.get(`products/?page=${page}`);
     try {
-      setProducts(listItem.data.results);
+      setProducts([...products, ...listItem.data.results]);
+      setPage((prev) => prev + 1);
+      console.log(products);
     } catch (error) {
       console.log(error);
+      return;
     }
   };
+  const { count, handleMinusCount, handlePlusCount } = useCounter(2);
 
   useEffect(() => {
-    loadProducts();
-  }, []);
+    if (inView) {
+      infinityScroll();
+    }
+  }, [inView]);
 
   return (
     <div>
       <AutoCarousel />
       <DefaultLayout>
+        <CountBtn
+          // overMessage={overMessage}
+          count={count}
+          onMinusClick={handleMinusCount}
+          onPlusClick={handlePlusCount}
+        />
         <WrapProducts>
           {products.map((item) => (
-            <ProductList key={item.product_id} item={item} />
+            <Link
+              to={`/productDetail/${item.product_id}`}
+              key={item.product_id}
+              state={{
+                id: item.product_id,
+                image: item.image,
+                price: item.price,
+                storeName: item.store_name,
+                productName: item.product_name,
+                info: item.product_info,
+                stock: item.stock,
+              }}
+            >
+              <ProductList key={item.product_id} item={item} />
+            </Link>
           ))}
         </WrapProducts>
+        <div ref={ref}></div>
       </DefaultLayout>
     </div>
   );
