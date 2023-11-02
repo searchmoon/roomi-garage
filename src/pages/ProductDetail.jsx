@@ -5,13 +5,14 @@ import BtnPlain from '../components/common/buttons/BtnPlain';
 import { DefaultLayout } from '../components/layouts/DefaultLayout';
 import ItemInfoTabs from '../components/products/ItemInfoTabs';
 import CountBtn from '../components/common/buttons/CountBtn';
-import useCounter from '../hooks/useCounter';
+import { useState } from 'react';
+import transformComma from '../utils/transformComma';
 
 const ProductDetail = () => {
+  const [alertMessage, setAlertMessage] = useState(null);
+  const [count, setCount] = useState(1);
   const location = useLocation();
   const item = location.state;
-
-  const { count, handleMinusCount, handlePlusCount } = useCounter(1);
 
   return (
     <ProductDetailStyle>
@@ -26,7 +27,7 @@ const ProductDetail = () => {
                 <p className={'store-name'}>{item.storeName}</p>
                 <p className={'title'}>{item.productName}</p>
                 <div className={'price'}>
-                  <strong>{item.price}</strong>
+                  <strong>{transformComma(item.price)}</strong>
                   {/*금액에 콤마 넣는 함수 만들기 util 함수*/}
                   <span>원</span>
                 </div>
@@ -36,10 +37,11 @@ const ProductDetail = () => {
               <span>택배배송 / 무료배송</span>
               <TopBottomLine>
                 <CountBtn
-                  // overMessage={overMessage}
                   count={count}
-                  onMinusClick={handleMinusCount}
-                  onPlusClick={handlePlusCount}
+                  setCount={setCount}
+                  stock={item.stock}
+                  alertMessage={alertMessage}
+                  setAlertMessage={setAlertMessage}
                 />
               </TopBottomLine>
               <div className={'wrap-price'}>
@@ -49,7 +51,7 @@ const ProductDetail = () => {
                     총 수량 <span>{count}</span>개 |
                   </p>
                   <div className={'price'}>
-                    <strong>{item.price}</strong>
+                    <strong>{transformComma(item.price * count)}</strong>
                     {/*금액에 콤마 넣기*/}
                     <span>원</span>
                   </div>
@@ -121,6 +123,7 @@ const ProductDetailStyle = styled.div`
       flex-direction: column;
       justify-content: space-between;
       width: 50%;
+      min-height: 420px;
       .info-wrap {
         height: 100%;
         //display: flex;

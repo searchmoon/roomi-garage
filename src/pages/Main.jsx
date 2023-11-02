@@ -6,8 +6,6 @@ import styled from 'styled-components';
 import { DefaultLayout } from '../components/layouts/DefaultLayout';
 import { useInView } from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
-import CountBtn from '../components/common/buttons/CountBtn';
-import useCounter from '../hooks/useCounter';
 
 const Main = () => {
   const [products, setProducts] = useState([]);
@@ -25,7 +23,6 @@ const Main = () => {
       return;
     }
   };
-  const { count, handleMinusCount, handlePlusCount } = useCounter(2);
 
   useEffect(() => {
     if (inView) {
@@ -37,12 +34,6 @@ const Main = () => {
     <div>
       <AutoCarousel />
       <DefaultLayout>
-        <CountBtn
-          // overMessage={overMessage}
-          count={count}
-          onMinusClick={handleMinusCount}
-          onPlusClick={handlePlusCount}
-        />
         <WrapProducts>
           {products.map((item) => (
             <Link

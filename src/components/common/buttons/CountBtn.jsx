@@ -1,18 +1,22 @@
 import { HiOutlineMinus, HiOutlinePlus } from 'react-icons/hi';
 import styled from '@emotion/styled';
 import { commonColors } from '../../../styles/commonColors';
+import useCounter from '../../../hooks/useCounter';
 
-const CountBtn = ({ count, onMinusClick, onPlusClick }) => {
+const CountBtn = ({ stock, alertMessage, setAlertMessage, count, setCount }) => {
+  const { handleMinusClick, handlePlusClick } = useCounter(count, setCount, stock, setAlertMessage);
+
+  console.log(stock);
   return (
     <CountBtnStyle>
-      <button onClick={onMinusClick}>
+      <button onClick={handleMinusClick}>
         <HiOutlineMinus />
       </button>
       <p>{count}</p>
-      <button onClick={onPlusClick}>
+      <button onClick={handlePlusClick}>
         <HiOutlinePlus />
       </button>
-      {/* {overMessage && <span className={'error-msg'}>총 재고 수량을 초과하였습니다.</span>} */}
+      {alertMessage && <span className={'error-msg'}>{alertMessage}</span>}
     </CountBtnStyle>
   );
 };

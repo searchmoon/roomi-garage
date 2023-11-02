@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { commonColors } from '../../styles/commonColors';
+import transformComma from '../../utils/transformComma';
 
 const ProductList = ({ item }) => {
   return (
@@ -10,7 +11,7 @@ const ProductList = ({ item }) => {
       <p className={'store'}>{item['store_name']}</p>
       <p className={'title'}>{item['product_name']}</p>
       <div className={'price'}>
-        <strong>{item.price}</strong>
+        <strong>{transformComma(item.price)}</strong>
         <span>원</span>
       </div>
     </ProductListStyle>
