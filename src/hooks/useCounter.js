@@ -1,7 +1,7 @@
 const useCounter = (count, setCount, stock = null, setAlertMessage) => {
   const handleMinusClick = () => {
     if (count === 1) {
-      const message = '최소 주문 가능한 수량입니다.';
+      const message = '주문 가능한 최소 수량입니다.';
       setAlertMessage(message);
 
       setTimeout(() => {
@@ -21,7 +21,7 @@ const useCounter = (count, setCount, stock = null, setAlertMessage) => {
       setTimeout(() => {
         setAlertMessage((prev) => !prev);
       }, 2000);
-      
+
       return;
     }
 

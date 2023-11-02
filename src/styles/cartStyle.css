@@ -1,0 +1,18 @@
+.wrap-input {
+  width: 5%;
+  text-align: left;
+}
+.product-info {
+  width: 50%;
+}
+.total-count {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+.total-price {
+  width: 25%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

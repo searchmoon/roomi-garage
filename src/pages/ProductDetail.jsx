@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { commonColors } from '../styles/commonColors';
 import BtnPlain from '../components/common/buttons/BtnPlain';
 import { DefaultLayout } from '../components/layouts/DefaultLayout';
@@ -13,6 +13,16 @@ const ProductDetail = () => {
   const [count, setCount] = useState(1);
   const location = useLocation();
   const item = location.state;
+
+  //장바구니에 상품 추가
+  const handleAddItemToCart = async (e) => {
+    e.preventDefault(); // 필요한게 맞는가?
+    try {
+      console.log(e);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <ProductDetailStyle>
@@ -28,7 +38,6 @@ const ProductDetail = () => {
                 <p className={'title'}>{item.productName}</p>
                 <div className={'price'}>
                   <strong>{transformComma(item.price)}</strong>
-                  {/*금액에 콤마 넣는 함수 만들기 util 함수*/}
                   <span>원</span>
                 </div>
               </div>
@@ -59,7 +68,11 @@ const ProductDetail = () => {
               </div>
               <div className={'wrap-btn'}>
                 <BtnPlain width={'65%'}>바로 구매</BtnPlain>
-                <BtnPlain width={'35%'} color={commonColors.lightPrimary}>
+                <BtnPlain
+                  onClick={handleAddItemToCart}
+                  width={'35%'}
+                  color={commonColors.lightPrimary}
+                >
                   장바구니
                 </BtnPlain>
               </div>
