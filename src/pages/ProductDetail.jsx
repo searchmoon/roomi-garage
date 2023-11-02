@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { commonColors } from '../styles/commonColors';
 import BtnPlain from '../components/common/buttons/BtnPlain';
 import { DefaultLayout } from '../components/layouts/DefaultLayout';

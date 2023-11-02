@@ -4,6 +4,8 @@ import Main from './pages/Main';
 import Layout from './components/layouts/Layout';
 import Cart from './pages/Cart';
 import ProductDetail from './pages/ProductDetail';
+import SignUp from './pages/SignUp';
+import SignIn from './pages/SignIn';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path="/productDetail/:id" element={<ProductDetail />} />
           <Route path="/cart" element={<Cart />} />
         </Route>
+        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
       </Routes>
     </BrowserRouter>
   );
