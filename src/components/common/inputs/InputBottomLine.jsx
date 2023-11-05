@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { commonColors } from '../../../styles/commonColors';
 
-const InputBottomLine = ({ onChange, value, type, placeholder, name, ref, ...rest }) => {
+const InputBottomLine = ({ onChange, value, type, placeholder, name, register, ...rest }) => {
   return (
     <InputBottomLineStyle
       onChange={onChange}
@@ -9,7 +9,7 @@ const InputBottomLine = ({ onChange, value, type, placeholder, name, ref, ...res
       name={name}
       value={value}
       type={type}
-      ref={ref}
+      {...register}
       {...rest}
     ></InputBottomLineStyle>
   );
