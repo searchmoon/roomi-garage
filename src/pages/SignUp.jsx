@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import SignInBasicForm from '../components/auth/tabContents/SignInBasicForm';
 import AuthTab from '../components/common/tabs/AuthTab';
+import SignUpBasicForm from '../components/auth/tabContents/SignUpBasicForm';
 
 const SignUp = () => {
   return (
     <SignUpStyle>
       <p className={'main-title'}>ROOMi</p>
-      <AuthTab>
-        <SignInBasicForm />
+      <AuthTab tabName={'가입'}>
+        <SignUpBasicForm />
       </AuthTab>
     </SignUpStyle>
   );

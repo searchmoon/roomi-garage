@@ -9,7 +9,7 @@ const SignIn = () => {
     <SignInStyle>
       <p className={'main-title'}>ROOMi</p>
 
-      <AuthTab>
+      <AuthTab tabName={' 로그인'}>
         <SignInBasicForm />
       </AuthTab>
       <div className={'wrap-btn'}>

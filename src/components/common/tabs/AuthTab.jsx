@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { commonColors } from '../../../styles/commonColors';
 
 const AuthTab = ({ tabName, children }) => {
-  const [userType, setUserType] = useState('BUYER');
+  const [loginType, setLoginType] = useState('BUYER');
 
-  const handleSelectTabName = () => {
-    if (userType === 'BUYER') {
-      setUserType('SELLER');
+  const handleSelectTabName = (e) => {
+    if (e.target.id === 'BUYER') {
+      setLoginType('BUYER');
     } else {
-      setUserType('BUYER');
+      setLoginType('SELLER');
     }
   };
 
@@ -18,14 +18,14 @@ const AuthTab = ({ tabName, children }) => {
       <div className="bloc-tabs">
         <button
           id={'BUYER'}
-          className={userType === 'BUYER' ? 'tabs active-tabs' : 'tabs'}
+          className={loginType === 'BUYER' ? 'tabs active-tabs' : 'tabs'}
           onClick={handleSelectTabName}
         >
           구매회원{tabName}
         </button>
         <button
           id={'SELLER'}
-          className={userType === 'SELLER' ? 'tabs active-tabs' : 'tabs'}
+          className={loginType === 'SELLER' ? 'tabs active-tabs' : 'tabs'}
           onClick={handleSelectTabName}
         >
           판매회원{tabName}
@@ -33,7 +33,7 @@ const AuthTab = ({ tabName, children }) => {
       </div>
       <div className="content-tabs">
         <div className={'content'}>
-          {children}
+          {React.cloneElement(children, { loginType })}
         </div>
       </div>
     </TabStyle>
