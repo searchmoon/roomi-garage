@@ -7,8 +7,24 @@ import { DefaultLayout } from '../layouts/DefaultLayout';
 import FilterInput from './FilterInput';
 import BtnHeaderIcon from './BtnHeaderIcon';
 import BtnPlain from '../common/buttons/BtnPlain';
+import { useState } from 'react';
+import { axiosInstance } from '../../api/axios-api';
 
 function Header() {
+  const [userType, setUserType] = useState(localStorage.getItem('user_type'));
+  const [haveToken, setHaveToken] = useState(localStorage.getItem('token'));
+  const handleLogout = async () => {
+    try {
+      const res = await axiosInstance.post('/accounts/logout/');
+      console.log(res);
+    } catch (errors) {
+      console.log(errors);
+    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('user_type');
+    setUserType(null);
+    setHaveToken(null);
+  };
   return (
     <HeaderStyle>
       <DefaultLayout>
@@ -20,17 +36,33 @@ function Header() {
             <FilterInput />
           </LeftDiv>
           <RightDiv>
-            <Link to={'/cart'}>
-              <BtnHeaderIcon title={'장바구니'} icon={<FiShoppingCart className={'icon'} />} />
-            </Link>
+            {/* {userType === 'BUYER' && !haveToken && ( */}
+            {userType !== 'SELLER' && (
+              <Link to={'/cart'}>
+                <BtnHeaderIcon title={'장바구니'} icon={<FiShoppingCart className={'icon'} />} />
+              </Link>
+            )}
+            {/* )} */}
             <BtnHeaderIcon title={'마이페이지'} icon={<RxPerson className={'icon'} />} />
-            <Link to={'/signIn'}>
-              <BtnHeaderIcon title={'로그인'} icon={<RxPerson className={'icon'} />} />
-            </Link>
 
-            <BtnPlain icon={<FiShoppingBag className={'btn-icon'} />} padding={'11px 20px'}>
-              판매자 센터
-            </BtnPlain>
+            {!haveToken ? (
+              <Link to={'/signIn'}>
+                <BtnHeaderIcon title={'로그인'} icon={<RxPerson className={'icon'} />} />
+              </Link>
+            ) : (
+              <Link to={'/'}>
+                <BtnHeaderIcon
+                  onClick={handleLogout}
+                  title={'로그아웃'}
+                  icon={<RxPerson className={'icon'} />}
+                />
+              </Link>
+            )}
+            {userType === 'SELLER' && (
+              <BtnPlain icon={<FiShoppingBag className={'btn-icon'} />} padding={'11px 20px'}>
+                판매자 센터
+              </BtnPlain>
+            )}
           </RightDiv>
         </WrapDiv>
       </DefaultLayout>

@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-const BtnHeaderIcon = (props) => {
+const BtnHeaderIcon = ({ icon, title, onClick }) => {
   return (
-    <Button>
-      {props.icon}
-      <p>{props.title}</p>
+    <Button onClick={onClick}>
+      {icon}
+      <p>{title}</p>
     </Button>
   );
 };

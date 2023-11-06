@@ -37,7 +37,7 @@ const Main = () => {
         <WrapProducts>
           {products.map((item) => (
             <Link
-              to={`/productDetail/${item.product_id}`}
+              to={`/products/${item.product_id}`}
               key={item.product_id}
               state={{
                 id: item.product_id,

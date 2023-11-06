@@ -5,6 +5,7 @@ import { DefaultLayout } from '../components/layouts/DefaultLayout';
 import CartItemBox from '../components/cart/CartItemBox';
 
 const Cart = () => {
+  const userType = localStorage.getItem('user_type');
   return (
     <CartStyle>
       <DefaultLayout>
@@ -17,7 +18,11 @@ const Cart = () => {
           <p className={'total-count'}>수량</p>
           <p className={'total-price'}>상품금액</p>
         </div>
-        <CartItemBox />
+        {userType ? (
+          <CartItemBox />
+        ) : (
+          <div className="none-product">장바구니에 담긴 상품이 없습니다.</div>
+        )}
       </DefaultLayout>
     </CartStyle>
   );
@@ -44,6 +49,12 @@ const CartStyle = styled.div`
     .wrap-input {
       text-align: left;
     }
+  }
+  .none-product {
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
