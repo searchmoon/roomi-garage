@@ -1,20 +1,35 @@
 import styled from 'styled-components';
 import { commonColors } from '../../styles/commonColors';
 import transformComma from '../../utils/transformComma';
+import { Link } from 'react-router-dom';
 
 const ProductList = ({ item }) => {
   return (
-    <ProductListStyle>
-      <div className={'img-wrap'}>
-        <img src={item.image} alt={'product-list'} />
-      </div>
-      <p className={'store'}>{item['store_name']}</p>
-      <p className={'title'}>{item['product_name']}</p>
-      <div className={'price'}>
-        <strong>{transformComma(item.price)}</strong>
-        <span>원</span>
-      </div>
-    </ProductListStyle>
+    <Link
+      to={`/products/${item.product_id}`}
+      key={item.product_id}
+      state={{
+        id: item.product_id,
+        image: item.image,
+        price: item.price,
+        storeName: item.store_name,
+        productName: item.product_name,
+        info: item.product_info,
+        stock: item.stock,
+      }}
+    >
+      <ProductListStyle>
+        <div className={'img-wrap'}>
+          <img src={item.image} alt={'product-list'} />
+        </div>
+        <p className={'store'}>{item['store_name']}</p>
+        <p className={'title'}>{item['product_name']}</p>
+        <div className={'price'}>
+          <strong>{transformComma(item.price)}</strong>
+          <span>원</span>
+        </div>
+      </ProductListStyle>
+    </Link>
   );
 };
 

@@ -4,7 +4,7 @@ import { FiShoppingBag, FiShoppingCart } from 'react-icons/fi';
 import { RxPerson } from 'react-icons/rx';
 import { commonColors } from '../../styles/commonColors';
 import { DefaultLayout } from '../layouts/DefaultLayout';
-import FilterInput from './FilterInput';
+import FilterInput from './SearchInput';
 import BtnHeaderIcon from './BtnHeaderIcon';
 import BtnPlain from '../common/buttons/BtnPlain';
 import { useState } from 'react';
@@ -25,6 +25,7 @@ function Header() {
     setUserType(null);
     setHaveToken(null);
   };
+
   return (
     <HeaderStyle>
       <DefaultLayout>
@@ -33,16 +34,16 @@ function Header() {
             <Link to={'/'}>
               <p className={'main-title'}>ROOMi</p>
             </Link>
-            <FilterInput />
+            <Link to={'/search'}>
+              <FilterInput />
+            </Link>
           </LeftDiv>
           <RightDiv>
-            {/* {userType === 'BUYER' && !haveToken && ( */}
             {userType !== 'SELLER' && (
               <Link to={'/cart'}>
                 <BtnHeaderIcon title={'장바구니'} icon={<FiShoppingCart className={'icon'} />} />
               </Link>
             )}
-            {/* )} */}
             <BtnHeaderIcon title={'마이페이지'} icon={<RxPerson className={'icon'} />} />
 
             {!haveToken ? (
