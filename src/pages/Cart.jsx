@@ -3,9 +3,39 @@ import { commonColors } from '../styles/commonColors';
 import '../styles/cartStyle.css';
 import { DefaultLayout } from '../components/layouts/DefaultLayout';
 import CartItemBox from '../components/cart/CartItemBox';
+import { useEffect, useState } from 'react';
+import { accessInstance, axiosInstance } from '../api/axios-api';
 
 const Cart = () => {
   const userType = localStorage.getItem('user_type');
+  const [cartItems, setCartItems] = useState([]);
+
+  const getCartList = async () => {
+    try {
+      const res = await accessInstance.get('/cart/');
+      const cartItems = res.data.results;
+      console.log(cartItems);
+
+      // 각 카트 항목의 product_id를 추출하고 추가 정보를 가져오는 Promise 배열 생성
+      const filteringProductItems = cartItems.map(async (item) => {
+        const id = item.product_id;
+        const productRes = await axiosInstance.get(`/products/${id}`);
+        console.log(productRes);
+        return { ...item, ...productRes.data };
+      });
+
+      // Promise.all을 사용하여 모든 추가 정보를 가져온 후 상태를 설정
+      const itemsWithProductInfo = await Promise.all(filteringProductItems);
+      setCartItems(itemsWithProductInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getCartList();
+  }, []);
+
   return (
     <CartStyle>
       <DefaultLayout>
@@ -19,7 +49,7 @@ const Cart = () => {
           <p className={'total-price'}>상품금액</p>
         </div>
         {userType ? (
-          <CartItemBox />
+          cartItems.map((item) => <CartItemBox key={item.cart_item_id} item={item} />)
         ) : (
           <div className="none-product">장바구니에 담긴 상품이 없습니다.</div>
         )}

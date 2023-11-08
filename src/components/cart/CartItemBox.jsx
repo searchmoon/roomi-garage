@@ -4,8 +4,12 @@ import '../../styles/cartStyle.css';
 import { commonColors } from '../../styles/commonColors';
 import CountBtn from '../common/buttons/CountBtn';
 import BtnPlain from '../common/buttons/BtnPlain';
+import { useState } from 'react';
 
-const CartItemBox = () => {
+const CartItemBox = ({ item }) => {
+  const [count, setCount] = useState(item.quantity);
+
+  console.log(item);
   return (
     <CartItemBoxStyle>
       <div className={'wrap-input'}>
@@ -13,21 +17,25 @@ const CartItemBox = () => {
       </div>
       <div className={'product-info'}>
         <div className={'img-wrap'}>
-          <img src={''} alt={'product-list'} />
+          <img src={item.image} alt={'product-list'} />
         </div>
         <div className={'item-info'}>
-          {/* <p className={'sub-title gray'}>{item.store_name}섭타이틀</p>
-          <p className={'title'}>{item.product_name}프로덕트 네임</p>
+          <p className={'sub-title gray'}>{item.store_name}</p>
+          <p className={'title'}>{item.product_name}</p>
           <p className={'price'}>{Number(item.price).toLocaleString()}원</p>
-          <p className={'gray'}>택배배송 / 무료배송</p> */}
+          <p className={'gray'}>
+            택배배송 / {item.shipping_fee === 0 ? '무료배송' : `${item.shipping_fee} 원`}
+          </p>
         </div>
       </div>
 
       <div className={'total-count'}>
-        <CountBtn />
+        <CountBtn count={count} setCount={setCount} />
       </div>
       <div className={'total-price'}>
-        <p className={'price'}>원</p>
+        <p className={'price'}>
+          {Number(item.price * count + item.shipping_fee).toLocaleString()}원
+        </p>
         <BtnPlain width={'130px'} padding={'10px'}>
           주문하기
         </BtnPlain>
